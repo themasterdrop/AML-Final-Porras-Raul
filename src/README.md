@@ -1,29 +1,43 @@
-Generador de Dataset Simulado: FAENVIPE
-Este script de Python se encarga de crear el conjunto de datos sintético utilizado para el entrenamiento y validación del sistema de detección de defectos en envases de vidrio. La simulación modela condiciones reales de una línea de soplado y transporte.
+# Generador de Dataset: Simulación de Inspección Industrial (FAENVIPE)
+Este script en Python se encarga de crear el conjunto de datos sintético de 100,000 registros utilizado para el entrenamiento y validación del sistema. La simulación modela las condiciones físicas de una línea de soplado y transporte de vidrio.
 
-Descripción de Variables
-El dataset generado cuenta con 100,000 registros y las siguientes características técnicas:
-Variable,Tipo,Descripción,Rango/Valores
-id_envase,Int,Identificador único de la unidad.,"1 - 100,000"
-temperatura_horno,Float,Temperatura registrada en el soplado.,1450°C - 1550°C
-velocidad_cinta,Float,Velocidad de transporte del envase.,0.5 - 2.0 m/s
-tipo_envase,Categorical,Formato del frasco producido.,"Cerveza, Mermelada, Jarabe"
-color_vidrio,Categorical,Tonalidad del material fundido.,"Ambar, Transparente, Verde"
-tipo_defecto,Target,Resultado de la inspección.,"Ninguno, Burbuja, Grieta, Mancha"
+## Objetivo
+Producir un set de datos de alta fidelidad que replique el desbalance de clases y las correlaciones térmicas reales de la planta, permitiendo evaluar la capacidad del modelo para detectar fallas críticas bajo condiciones de estrés.
 
-Lógica de la Simulación
-Para que el modelo de Inteligencia Artificial tenga patrones que aprender, el script implementa una lógica de correlación industrial:
-Cálculo de Probabilidad: Se genera una variable latente de "riesgo" donde a mayor temperatura y mayor velocidad de cinta, aumenta la probabilidad de generar un defecto.
-Umbral de Estado: Si el riesgo supera el 40%, el envase se marca como defectuoso.
-Distribución de Fallas: Los defectos no son equitativos, imitando la realidad de la planta:
-Burbujas (50%): El defecto más común por exceso de calor.
-Grietas (30%): Defecto crítico por enfriamiento/velocidad inadecuada.
-Manchas (20%): Defecto estético por impurezas.
+## Estructura del Dataset
+El archivo generado (dataset_faenvipe.csv) contiene las siguientes dimensiones técnicas:
 
-Instrucciones de Ejecución
-Para generar el archivo dataset_faenvipe.csv, asegúrate de tener instaladas las dependencias:
-pip install pandas numpy
-python generador_datos.py
+-Variables de Proceso: temperatura_horno (°C) y velocidad_cinta (m/s).
 
-Nota Técnica
-Se ha utilizado una semilla aleatoria (np.random.seed(42)) para garantizar la reproducibilidad. Esto significa que cualquier investigador que ejecute el script obtendrá exactamente el mismo dataset, permitiendo la comparación justa de modelos.
+-Variables de Producto: tipo_envase (Cerveza, Mermelada, Jarabe) y color_vidrio.
+
+-Variable Objetivo: tipo_defecto (Ninguno, Burbuja, Grieta, Mancha).
+
+## Lógica de Simulación
+El script no asigna defectos al azar, sino que sigue una lógica de ingeniería agroindustrial:
+
+-**Cálculo de Riesgo/**: Se define una función donde el aumento de la temperatura y la velocidad incrementan la probabilidad de fallo estructural.
+
+-**Umbral de Calidad/**: Si el riesgo supera el 40%, el envase es marcado como defectuoso.
+
+-**Distribución Realista/**: Se aplica un desbalance para imitar la frecuencia de fallas en planta:
+
+-Burbujas (50%): Por inestabilidad térmica.
+
+-Grietas (30%): Por choque mecánico o enfriamiento rápido.
+
+-Manchas (20%): Por impurezas en el material.
+
+## Tecnologías
+Librería Base: NumPy (Generación de distribuciones aleatorias).
+
+Procesamiento: Pandas (Estructuración de dataframes y exportación CSV).
+
+Reproducibilidad: Semilla aleatoria fija (seed 42) para garantizar resultados consistentes.
+
+## Instrucciones de Uso
+Asegúrate de tener instalado Python y las librerías: pip install pandas numpy
+
+Ejecuta el script: python generador_datos.py
+
+El archivo resultante aparecerá en la carpeta local listo para ser procesado por el notebook principal.
