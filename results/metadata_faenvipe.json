@@ -1,0 +1,1 @@
+{"proyecto": "FAENVIPE - Control de Calidad de Envases", "accuracy_final": 0.7974, "learning_rate": 0.001, "batch_size": 32, "clases": ["Burbuja", "Grieta", "Mancha", "Ninguno"]}
