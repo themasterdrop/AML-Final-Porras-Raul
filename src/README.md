@@ -14,7 +14,7 @@ El archivo generado (dataset_faenvipe.csv) contiene las siguientes dimensiones t
 -Variable Objetivo: tipo_defecto (Ninguno, Burbuja, Grieta, Mancha).
 
 ## Lógica de Simulación
-El script no asigna defectos al azar, sino que sigue una lógica de ingeniería agroindustrial:
+El script no asigna defectos al azar, sino que sigue una lógica de ingeniería industrial:
 
 -**Cálculo de Riesgo/**: Se define una función donde el aumento de la temperatura y la velocidad incrementan la probabilidad de fallo estructural.
 
